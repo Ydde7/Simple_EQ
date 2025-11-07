@@ -1,0 +1,13 @@
+We created a repo using git init.
+
+To prevent the re uploading of heavy items, we can use .gitignore and specify the files / folders we don't want to repeat.
+
+	- Prevents items from being added by git
+
+Recall: GiT
+
+- Add or stash files (git add -a)
+
+- check status (git status)
+
+- commit (git commit - m "")
