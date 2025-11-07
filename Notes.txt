@@ -6,7 +6,7 @@ To prevent the re uploading of heavy items, we can use .gitignore and specify th
 
 Recall: GiT
 
-- Add or stash files (git add -a)
+- Add or stash files (git add .)
 
 - check status (git status)
 
