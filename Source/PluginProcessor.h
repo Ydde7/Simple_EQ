@@ -21,6 +21,7 @@ public:
     ~Simple_EQAudioProcessor() override;
 
     //==============================================================================
+    // PREPARE TO PLAY
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
     void releaseResources() override;
 
@@ -28,7 +29,9 @@ public:
     bool isBusesLayoutSupported (const BusesLayout& layouts) const override;
    #endif
 
+    // DON'T INTERRUPT THIS UNLESS YOU WANT TO CAUSE DAMAGE
     void processBlock (juce::AudioBuffer<float>&, juce::MidiBuffer&) override;
+
 
     //==============================================================================
     juce::AudioProcessorEditor* createEditor() override;
@@ -52,6 +55,12 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+
+    // This will help establish the Parameter layout : Returns a parameter layout
+    static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+
+    // using "*this" audio processor | no UndoManager | "Parameters" is the valueTreeType | We create a function to return the layout
+    juce::AudioProcessorValueTreeState apvts{*this, nullptr, "Parameters", createParameterLayout()}
 
 private:
     //==============================================================================

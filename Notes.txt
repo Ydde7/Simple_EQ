@@ -4,10 +4,107 @@ To prevent the re uploading of heavy items, we can use .gitignore and specify th
 
 	- Prevents items from being added by git
 
-Recall: GiT
+Recall: Git
 
 - Add or stash files (git add .)
 
 - check status (git status)
 
 - commit (git commit - m "")
+
+
+====================================
+Notes on the plugin processor header
+====================================
+
+ * prepareToPlay() : Called when preparing for playback
+			- This is for pre-playback initialisation (
+	
+
+ * processBlock()  : Upon play button beeing hit, the host sends buffers into the plugin
+ 			(!) The Plugin's job is to return finished processed audio.
+
+			(!) Interruptions can cause latency which causes pops and clicks at dangerous and damaging frequencies.
+			(!) DO NOT INTERRUPT THE PROCESS BLOCK (!)
+
+
+===================================
+Dissection
+===================================
+
+ * ProcessBlock() : 
+ 	- We get our audio stream here (block of audio data)
+	- Midi messages come in here
+	(!) Code goes in this block and must run within the alotted time
+
+
+===================================
+-----------------------------------
+===================================
+
+===================================
+Plugin Editor
+===================================
+
+	<Contains>
+		- Constructor
+		- Paint Function
+		- Resize Function
+
+	(!) Set up basic visual elements here
+
+	
+
+====================================
+Dissection
+====================================
+
+	* paint()   : Display components like textboxes / the screen
+	* resized() : Houses additional child-components like buttons and more text?
+
+
+===================================
+===================================
+===================================
+
+Creating Audio Parameters
+
+===================================
+
+ Start in pluginprocesser.h
+	- Variable declaration
+ 	Overview:
+		- Audio plugins rely on *Parameters* to control DSP elements (Digital Signal Processing)
+		(!) Juce uses an object that will be connected to all GUI elements, hence it must be public.
+
+		// This is an object, hence we need to use its provided constructor
+			// Note the use of curly braces here!
+		For DSP -> juce::AudioProcessorValueTreeState objectNameHere{AudioProcessorToConnectTo, UndoManager *undoManagerToUse, const Identifier &valueTreeType, ParameterLayout parameterLayout};
+
+			- audioprocessor can be set to *this
+			- UndoManager can be set to nullptr
+			- Identifier is the name, so give a string ie "Parameters"
+			- Parameter Layout should be given by a function that we create.
+				
+				// This is the signature / declaration
+				- static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+					- This doesn't have any members so we make it static.
+					- Returns a ParameterLayout
+			---------------			
+				// This is the implementation:
+					// Notice how createParameterLayout() is part of "Simple_EQAudioProcessorand not pluginProcessor.h (the classname and the filename DO NOT MATCH. Just be aware.
+					// For this project: Low, High , and parametric / peak Bands.
+					// Cut 
+
+				juce::AudioProcessorValueTreeState::ParameterLayout Simple_EQAudioProcessor::createParameterLayout() {
+
+				}
+			--------------
+
+
+			(!) our object expected the values of all parameters upon creation.
+
+		
+			
+
+
