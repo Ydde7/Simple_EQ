@@ -60,7 +60,7 @@ public:
     static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
 
     // using "*this" audio processor | no UndoManager | "Parameters" is the valueTreeType | We create a function to return the layout
-    juce::AudioProcessorValueTreeState apvts{*this, nullptr, "Parameters", createParameterLayout()}
+    juce::AudioProcessorValueTreeState apvts{ *this, nullptr, "Parameters", createParameterLayout() };
 
 private:
     //==============================================================================

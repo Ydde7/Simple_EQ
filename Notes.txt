@@ -103,8 +103,21 @@ Creating Audio Parameters
 
 
 			(!) our object expected the values of all parameters upon creation.
-
 		
-			
+		* We are using Juce's audioProcessorParameter class to build out values.
+			- Generic Interface for all audio parameter formats (windows use VST / VST3)
+
+			(!) Several derivations of this class that help with components (sliders, switches, combo boxes)
+
+				- AudioParameterFloat: Parameters witha  range of values (use for sliders)
+		
+			- For the parameterfloat, the 20.f and 20000.f relate to the audible range of the human ear.
+
+			- Skew Factor allows the slider to change its impact the higher or lower up you are.
+
+			(!) The main three filters are in hurtz, but "Peak Gain" will be in Decibles (different range, step, and skew)
+
+			- Note, juce has its own data structures oe StringArray plus its own ddatatypes ie string. be use to understand how to use them 
+				- str looks like it comes with inbuild concatenation.
 
 
